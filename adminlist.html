@@ -4,13 +4,13 @@ courtesy: https://stackoverflow.com/a/14215034 -->
 
 {% block name %}
 <div class="col">
-  <div class="infobox">
-      <h5>Shelter Name:</h5>
-    <input type="text" name="name" form="shelter{{ shelter._id }}" value="{{ shelter.name or '' }}">
-  </div>
+	<div class="infobox">
+		<h5>Shelter Name:</h5>
+		<input type="text" name="name" form="shelter{{ shelter._id }}" value="{{ shelter.name or '' }}">
+	</div>
 </div>
 
-{% endblock %} 
+{% endblock %}
 
 {% block photo %} {#
 <label for="imageURL">Image URL:</label>
@@ -20,9 +20,9 @@ courtesy: https://stackoverflow.com/a/14215034 -->
 <input type="text" name="city" value="Portland" disabled size="4" form="shelter{{ shelter._id }}">
 <input type="text" name="state" value="OR" disabled size="2" form="shelter{{ shelter._id }}">
 <select name="zipcode" form="shelter{{ shelter._id }}">
-  {% for zip in range(97201, 97300) %} {# inclusive, exclusive #}
-  <option {% if shelter.zipcode==zip %}selected{% endif %} value="{{ zip }}">{{ zip }}</option>
-  {% endfor %}
+	{% for zip in range(97201, 97300) %} {# inclusive, exclusive #}
+	<option {% if shelter.zipcode==zip %}selected{% endif %} value="{{ zip }}">{{ zip }}</option>
+	{% endfor %}
 </select>
 {% endblock %}
 
@@ -43,7 +43,7 @@ courtesy: https://stackoverflow.com/a/14215034 -->
 {% endblock %}
 {% block capacity %}
 <label for="bedsFree" style="width:100%">Beds Available:</label>
-<input type="number"name="bedsFree" required min="0" max="10000" class="inputnumber" form="shelter{{ shelter._id }}" value="{{ shelter.bedsFree or '' }}">
+<input type="number" name="bedsFree" required min="0" max="10000" class="inputnumber" form="shelter{{ shelter._id }}" value="{{ shelter.bedsFree or '' }}">
 <br>
 <label for="capacity" style="width:100%">Total Capacity:</label>
 <input type="number" name="capacity" required min="0" max="10000" class="inputnumber" form="shelter{{ shelter._id }}" value="{{ shelter.capacity or '' }}"> {% endblock %}
@@ -59,16 +59,16 @@ courtesy: https://stackoverflow.com/a/14215034 -->
 
 {% block editform %}
 <form action="{{ url_for('account') }}" id="shelter{{ shelter._id }}" method="post">
-  <input type="text" name="shelter-id" value="{{ shelter._id }}" hidden>
-  <input type="submit" class="btn btn-primary editformbutton" name="update" value="Update Shelter Listing">
-  <input type="submit" class="btn btn-danger editformbutton" name="delete" value="Delete Shelter Listing">
-  <input type="reset" class="btn btn-secondary editformbutton" name="Reset form" value="Reset this form">
+	<input type="text" name="shelter-id" value="{{ shelter._id }}" hidden>
+	<input type="submit" class="btn btn-primary editformbutton" name="update" value="Update Shelter Listing">
+	<input type="submit" class="btn btn-danger editformbutton" name="delete" value="Delete Shelter Listing">
+	<input type="reset" class="btn btn-secondary editformbutton" name="Reset form" value="Reset this form">
 </form>
 {% endblock %}
 
 {% block newform %}
 <details class="shelterListEntry">
-  <summary class="shelterTitle">Add Shelter</summary>
-  {% include 'newshelterform.html' %}
+	<summary class="shelterTitle">Add Shelter</summary>
+	{% include 'newshelterform.html' %}
 </details>
 {% endblock %}
