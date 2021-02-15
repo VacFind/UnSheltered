@@ -86,9 +86,15 @@
 
 
 	</header>
-	{%- comment -%} {% with messages = get_flashed_messages(with_categories=true) %} {% if messages %} {% for category, message in messages %}
-	<div class="alert {{ category }}">{{ message }}</div>
-	{% endfor %} {% endif %} {% endwith %} {%- endcomment -%}
+	{%- comment -%}
+	{% assign messages = get_flashed_messages(with_categories=true) %}
+	{% if messages %}
+		{% for message in messages %}
+		<div class="alert {{ category }}">{{ message }}</div>
+		{% endfor %}
+	{% endif %}
+	{%- endcomment -%}
+	
 	<section class="container-fluid" id="content">
 		{page.content}
 	</section>

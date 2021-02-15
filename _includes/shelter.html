@@ -19,7 +19,6 @@
 
 	<div class="container-fluid">
 		<div class="row">
-			{% block name scoped %}{% endblock %}
 			{%- comment -%}
 			{% if include.shelter.imageURL is defined %}
 			<div class="col">
@@ -38,7 +37,8 @@
 					<a href="{{ include.shelter.mapURL }}" target="_blank">View shelter on Google Maps</a>
 				</div>
 			</div>
-			{%- comment -%} {% if include.shelter.donationURL is defined %}
+			{%- comment -%}
+			{% if include.shelter.donationURL is defined %}
 			<div class="col">
 				<div class="infobox">
 					<a href="{{ include.shelter.donationURL }}">
@@ -46,7 +46,8 @@
 					</a>
 				</div>
 			</div>
-			{% endif %} {%- endcomment -%}
+			{% endif %}
+			{%- endcomment -%}
 			<div class="col" style="margin-bottom: 10px">
 				<div class="infobox">
 					<h5>Contact Information:</h5>
@@ -99,5 +100,4 @@
 			-->
 		</div>
 	</div>
-	{% block editform scoped %}{% endblock %}
 </details>
