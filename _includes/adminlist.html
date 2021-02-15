@@ -1,7 +1,8 @@
-{% extends "listtemplate.html" %}
+---
+layout: listtemplate.html
+---
 <!-- theQuestion="{{ tobe or 'Not to be' }}"
 courtesy: https://stackoverflow.com/a/14215034 -->
-
 {% block name %}
 <div class="col">
 	<div class="infobox">
@@ -12,9 +13,15 @@ courtesy: https://stackoverflow.com/a/14215034 -->
 
 {% endblock %}
 
-{% block photo %} {#
+{% block photo %}
+{%- comment -%} 
 <label for="imageURL">Image URL:</label>
-<input type="url" name="imageURL" form="shelter{{ shelter._id }}" value="{{ shelter.imageURL or '' }}"> note: this only accepts URL's at this time. file uploads are not supported.#} {% endblock %} {% block address %}
+<input type="url" name="imageURL" form="shelter{{ shelter._id }}" value="{{ shelter.imageURL or '' }}"> note: this only accepts URL's at this time. file uploads are not supported.
+{%- endcomment -%}
+
+{% endblock %}
+{% block address %}
+
 <input type="text" name="streetaddress" placeholder="Street Address" form="shelter{{ shelter._id }}" value="{{ shelter.streetAddress or '' }}">
 <br>
 <input type="text" name="city" value="Portland" disabled size="4" form="shelter{{ shelter._id }}">
