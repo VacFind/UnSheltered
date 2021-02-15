@@ -1,0 +1,103 @@
+<details class="shelterListEntry">
+	<summary class="shelterSummary">
+
+		<span class="shelterTitle ">
+			<div class="container-fluid">
+				<div class="row">
+					<div class="col" style="padding-right:0px; padding-left:0px;">
+						{{ include.shelter.name }} {% if include.shelter.restrictions is defined %}
+						<i title="Has Restrictions" class="fas fa-exclamation-triangle warningColor shelterWarningIcon"></i>
+						{% endif %}
+					</div>
+					<div class="colalign-self-center" style="padding-right:0px; padding-left:5px; text-align:end">
+						<span class="shelterOccupancy" style="font-size:15px; font-weight:normal; align-self:center">{{ include.shelter.bedsFree }}</span>
+					</div>
+				</div>
+			</div>
+		</span>
+	</summary>
+
+	<div class="container-fluid">
+		<div class="row">
+			{% block name scoped %}{% endblock %}
+			{%- comment -%}
+			{% if include.shelter.imageURL is defined %}
+			<div class="col">
+				<div class="infobox">
+					<img src="{{ include.shelter.imageURL }}" />
+				</div>
+			</div>
+			{% endif %}
+			{%- endcomment -%}
+			<div class="col" style="margin-bottom: 10px">
+				<div class="infobox">
+					<h5>Address:</h5>
+					<p>{{ include.shelter.streetAddress }},
+						<br> {{ include.shelter.city }}, {{ include.shelter.state }} {{ include.shelter.zipcode }}
+					</p>
+					<a href="{{ include.shelter.mapURL }}" target="_blank">View shelter on Google Maps</a>
+				</div>
+			</div>
+			{%- comment -%} {% if include.shelter.donationURL is defined %}
+			<div class="col">
+				<div class="infobox">
+					<a href="{{ include.shelter.donationURL }}">
+						<h5>Donate to this Shelter</h5>
+					</a>
+				</div>
+			</div>
+			{% endif %} {%- endcomment -%}
+			<div class="col" style="margin-bottom: 10px">
+				<div class="infobox">
+					<h5>Contact Information:</h5>
+					{% if include.shelter.phoneNumber is defined %}
+					<!-- It might be better to make these inline styles instead of block styles-->
+					<p>Phone Number: {{ include.shelter.phoneNumber }}</p>
+					{% endif %}
+					{% if include.shelter.emailAddress is defined %}
+					<p>Email: {{ include.shelter.emailAddress }}</p>
+					{% endif %}
+					{% if include.shelter.websiteURL is defined %}
+					<a href="{{ include.shelter.websiteURL }}">Website</a>
+					{% endif %}
+				</div>
+			</div>
+			<div class="col" style="margin-bottom: 10px">
+				<div class="infobox">
+					<h5>Occupancy:</h5>
+					<p>{{ include.shelter.capacity-include.shelter.bedsFree }} / {{ include.shelter.capacity }} Spaces filled</p>
+				</div>
+			</div>
+			{% if include.shelter.amenities is defined %}
+			<div class="col" style="margin-bottom: 10px">
+				<div class="infobox">
+					<h5>Amenities:</h5>
+					<ul>
+						{% for amenity in include.shelter.amenities %}
+						<li>{{ amenity }}</li>
+						{% endfor %}
+					</ul>
+				</div>
+			</div>
+			{% endif %} {% if include.shelter.restrictions is defined %}
+			<div class="col" style="margin-bottom: 10px">
+				<div class="infobox">
+					<h5>Restrictions:</h5>
+					<ul>
+						{% for restriction in include.shelter.restrictions %}
+						<li>{{ restriction }}</li>
+						{% endfor %}
+					</ul>
+				</div>
+			</div>
+			{% endif %}
+			<!--<div class="col"
+				<div class="infobox">
+					this is generated based on address
+				</div>
+			</div>
+			-->
+		</div>
+	</div>
+	{% block editform scoped %}{% endblock %}
+</details>
