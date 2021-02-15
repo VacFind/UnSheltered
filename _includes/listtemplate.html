@@ -29,48 +29,77 @@
 				<div class="container-fluid">
 					<div class="row">
 
-						{% block name scoped %}{% endblock %} {#{% if shelter.imageURL is defined %}
-						<div class="col">
-							<div class="infobox">{% block photo scoped %}{% endblock %}</div>
-						</div>
-						{% endif %}#}
+						{% block name scoped %}{% endblock %}
+						{%- comment -%}
+							{% if shelter.imageURL is defined %}
+							<div class="col">
+								<div class="infobox">
+								<img src="{{ shelter.imageURL }}" />
+								</div>
+							</div>
+							{% endif %}
+						{%- endcomment -%}
 						<div class="col" style="margin-bottom: 10px">
 							<div class="infobox">
 								<h5>Address:</h5>
-								{% block address scoped %}{% endblock %}
+								<p>{{ shelter.streetAddress }},
+									<br> {{ shelter.city }}, {{ shelter.state }} {{ shelter.zipcode }}
+								</p>
+								<a href="{{ shelter.mapURL }}" target="_blank">View shelter on Google Maps</a>
 							</div>
 						</div>
-						{#{% if shelter.donationURL is defined %}
+						{%- comment -%} {% if shelter.donationURL is defined %}
 						<div class="col">
 							<div class="infobox">
-								{% block donationlink scoped %}{% endblock %}
+								<a href="{{ shelter.donationURL }}">
+									<h5>Donate to this Shelter</h5>
+								</a>
 							</div>
 						</div>
-						{% endif %#}
+						{% endif %} {%- endcomment -%}
 						<div class="col" style="margin-bottom: 10px">
 							<div class="infobox">
 								<h5>Contact Information:</h5>
-								{% block contactinfo scoped %}{% endblock %}
+								{% if shelter.phoneNumber is defined %}
+								<!-- It might be better to make these inline styles instead of block styles-->
+
+								<p>Phone Number: {{ shelter.phoneNumber }}</p>
+								{% endif %}
+								{% if shelter.emailAddress is defined %}
+								<p>Email: {{ shelter.emailAddress }}</p>
+								{% endif %}
+								{% if shelter.websiteURL is defined %}
+								<a href="{{ shelter.websiteURL }}">Website</a>
+								{% endif %}
+
 							</div>
 						</div>
 						<div class="col" style="margin-bottom: 10px">
 							<div class="infobox">
 								<h5>Occupancy:</h5>
-								{% block capacity scoped %}{% endblock %}
+								<p>{{ shelter.capacity-shelter.bedsFree }} / {{ shelter.capacity }} Spaces filled</p>
 							</div>
 						</div>
 						{% if shelter.amenities is defined %}
 						<div class="col" style="margin-bottom: 10px">
 							<div class="infobox">
 								<h5>Amenities:</h5>
-								{% block amenities scoped %}{% endblock %}
+								<ul>
+									{% for amenity in shelter.amenities %}
+										<li>{{ amenity }}</li>
+									{% endfor %}
+								</ul>
 							</div>
 						</div>
 						{% endif %} {% if shelter.restrictions is defined %}
 						<div class="col" style="margin-bottom: 10px">
 							<div class="infobox">
 								<h5>Restrictions:</h5>
-								{% block restrictions scoped %}{% endblock %}
+								<ul>
+									{% for restriction in shelter.restrictions %}
+										<li>{{ restriction }}</li>
+									{% endfor %}
+								</ul>
 							</div>
 						</div>
 						{% endif %}
